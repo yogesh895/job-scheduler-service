@@ -10,7 +10,12 @@ export interface Config {
 }
 
 export interface Postgres {
-  url: string;
+  typeorm_type: string;
+  postgres_host: string;
+  postgres_port: number;
+  postgres_password: string;
+  postgres_username: string;
+  postgres_database: string;
 }
 
 export const Configs = (): Config => {
@@ -23,7 +28,17 @@ export const Configs = (): Config => {
     port: parseInt(process.env.APP_PORT) || parseInt('3000'),
     databases: {
       postgres: {
-        url: process.env.DATABASE_POSTGRES_URL || '',
+        typeorm_type: process.env.DATABASE_TYPEORM_TYPE || 'postgres',
+        postgres_host:
+          process.env.DATABASE_POSTGRES_HOST ||
+          'ep-purple-snowflake-59883390.ap-southeast-1.aws.neon.tech',
+        postgres_port:
+          parseInt(process.env.DATABASE_POSTGRES_PORT) || parseInt('5432'),
+        postgres_password:
+          process.env.DATABASE_POSTGRES_PASSWORD || 'NcfHe6XZtLl0',
+        postgres_username: process.env.DATABASE_POSTGRES_USERNAME || 'yogesh',
+        postgres_database:
+          process.env.DATABASE_POSTGRES_DATABASE || 'jobscheduler',
       },
     },
   };
